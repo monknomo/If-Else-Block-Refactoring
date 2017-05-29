@@ -69,11 +69,11 @@ public class WidgetTransfer {
         this.amount = amount;
     }
 
-    String getTransferTypeCode() {
+    public String getTransferTypeCode() {
         return typeCode;
     }
 
-    String getAreaCode() {
+    public String getAreaCode() {
         return areaCode;
     }
 

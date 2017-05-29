@@ -18,11 +18,16 @@ public class Customer {
     String name;
     private String category;
 
-    String getCategory() {
+    public Customer(String name, String category) {
+        this.name = name;
+        this.category = category;
+    }
+
+    public String getCategory() {
         return category;
     }
 
-    WidgetAccount getAccount(WidgetAccount fromAccount) {
+    public WidgetAccount getAccount(WidgetAccount fromAccount) {
         return account.get(this);
     }
 }

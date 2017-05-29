@@ -21,7 +21,7 @@ public class WidgetAccount {
         this.balance = balance;
     }
 
-    Integer getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 }

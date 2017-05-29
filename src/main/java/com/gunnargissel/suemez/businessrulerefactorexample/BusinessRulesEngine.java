@@ -18,35 +18,29 @@ public class BusinessRulesEngine {
             businessRuleErrors += "Insufficient balance to transfer ; ";
         }
 
-        {
-            if (transfer.getTransferTypeCode().equals("200")
-                    && !transfer.getAreaCode().matches("907|412|213")) {
+        if (transfer.getTransferTypeCode().equals("200")) {
+            if (!transfer.getAreaCode().matches("907|412|213")) {
                 businessRuleErrors += "This area is not a transfer eligible area. ; ";
+            } else if (transfer.getAreaCode().matches("213")) {
+                if (transfer.getTransferer().getCategory().equals("D")) {
+                    businessRuleErrors += "D Category Transferer can only be transferred in transfer area 213. ; ";
+                }
+            }
+        } else if (transfer.getTransferTypeCode().equals("710")) {
+            if (!transfer.getAreaCode().matches("574|213|363|510")) {
+
             }
         }
 
-        if (transfer.getTransferTypeCode().equals("200")
-                && transfer.getAreaCode().matches("213")
-                && transfer.getTransferer().getCategory().equals("D")) {
-            businessRuleErrors += "D Category Transferer can only be transferred in transfer area 213. ; ";
-        }
-
-        if (transfer.getTransferTypeCode().equals("710")
-                && !transfer.getAreaCode().matches("574|213|363|510")) {
-            businessRuleErrors += "This area is not an eligible area. ; ";
+        if (!transfer.getTypeCode().equals("I")) {
+            if (!isBlockSize(transfer)) {
+                businessRuleErrors += "Amount is too small for I type transfer. ; ";
+            }
+            if (isTotalOverCap(transfer)) {
+                businessRuleErrors += "This transfer is too large. ; ";
+            }
 
         }
-
-        if (!transfer.getTypeCode().equals("I")
-                && !isBlockSize(transfer)) {
-            businessRuleErrors += "Amount is too small for I type transfer. ; ";
-        }
-
-        if (!transfer.getTypeCode().equals("I")
-                && isTotalOverCap(transfer)) {
-            businessRuleErrors += "This transfer is too large. ; ";
-        }
-
         return businessRuleErrors;
     }
 
