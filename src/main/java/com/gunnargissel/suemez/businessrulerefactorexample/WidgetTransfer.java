@@ -10,7 +10,7 @@ package com.gunnargissel.suemez.businessrulerefactorexample;
  * @author monknomo
  */
 public class WidgetTransfer {
-    
+
     Customer transferer;
     WidgetAccount fromAccount;
     Customer transferee;
@@ -18,7 +18,16 @@ public class WidgetTransfer {
     Integer amount;
     private String typeCode;
     private String areaCode;
-    private String TypeCode;
+
+    public WidgetTransfer(Customer transferer, WidgetAccount fromAccount, Customer transferee, WidgetAccount toAccount, Integer amount, String typeCode, String areaCode) {
+        this.transferer = transferer;
+        this.fromAccount = fromAccount;
+        this.transferee = transferee;
+        this.toAccount = toAccount;
+        this.amount = amount;
+        this.typeCode = typeCode;
+        this.areaCode = areaCode;
+    }
 
     public Customer getTransferer() {
         return transferer;
@@ -60,8 +69,6 @@ public class WidgetTransfer {
         this.amount = amount;
     }
 
-    
-    
     String getTransferTypeCode() {
         return typeCode;
     }
@@ -70,8 +77,12 @@ public class WidgetTransfer {
         return areaCode;
     }
 
-    String getTypeCode() {
-        return TypeCode;
+    public String getTypeCode() {
+        return typeCode;
     }
-      
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
 }

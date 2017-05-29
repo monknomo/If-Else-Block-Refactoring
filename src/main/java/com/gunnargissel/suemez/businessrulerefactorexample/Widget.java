@@ -10,6 +10,27 @@ package com.gunnargissel.suemez.businessrulerefactorexample;
  * @author monknomo
  */
 public class Widget {
+
     Integer value = Integer.valueOf(1);
     String sound = "beep boop";
+
+    public Widget() {
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
+    }
+
 }

@@ -13,10 +13,11 @@ public class BusinessRulesEngine {
 
     public static final String checkWidgetTransfer(WidgetTransfer transfer) {
         String businessRuleErrors = "";
-        
-        if (transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance().compareTo(transfer.getAmount()) > 0){
+
+        if (transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance().compareTo(transfer.getAmount()) > 0) {
             businessRuleErrors += "Insufficient balance to transfer ; ";
         }
+
         {
             if (transfer.getTransferTypeCode().equals("200")
                     && !transfer.getAreaCode().matches("907|412|213")) {
@@ -54,6 +55,6 @@ public class BusinessRulesEngine {
     }
 
     public static boolean isTotalOverCap(WidgetTransfer transfer) {
-       return transfer.getAmount().compareTo(1000000) > 0;
+        return transfer.getAmount().compareTo(1000000) > 0;
     }
 }

@@ -10,7 +10,16 @@ package com.gunnargissel.suemez.businessrulerefactorexample;
  * @author monknomo
  */
 public class WidgetAccount {
+
     Integer balance;
+
+    public WidgetAccount(Integer balance) {
+        this.balance = balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
 
     Integer getBalance() {
         return balance;
