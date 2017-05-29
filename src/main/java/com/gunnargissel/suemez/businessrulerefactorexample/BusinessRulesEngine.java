@@ -11,53 +11,49 @@ package com.gunnargissel.suemez.businessrulerefactorexample;
  */
 public class BusinessRulesEngine {
 
-    private String checkWidgetTransfer(WidgetTransfer transfer) {
+    public static final String checkWidgetTransfer(WidgetTransfer transfer) {
         String businessRuleErrors = "";
-
-        //Set up variables with business-rule relevant names
-        String transferTypeCode = transfer.getTransferTypeCode();
-        String areaCode = transfer.getAreaCode();
-        String transfererCategory = transfer.getTrasferer().getCategory();
-        String typeCode = transfer.getTypeCode();
-
-        if (transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance().compareTo(0) > 0) //Each block of logic checkes all the conditions required  bfg 
+        
+        if (transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance().compareTo(transfer.getAmount()) > 0){
+            businessRuleErrors += "Insufficient balance to transfer ; ";
+        }
         {
-            if (transferTypeCode.equals("200")
-                    && !areaCode.matches("2C|3A|3B")) {
+            if (transfer.getTransferTypeCode().equals("200")
+                    && !transfer.getAreaCode().matches("907|412|213")) {
                 businessRuleErrors += "This area is not a transfer eligible area. ; ";
             }
         }
 
-        if (transferTypeCode.equals("200")
-                && areaCode.matches("2C")
-                && transfererCategory.equals("D")) {
-            businessRuleErrors += "D Category Transferer can only be transferred in transfer area 3B and 3A. ; ";
+        if (transfer.getTransferTypeCode().equals("200")
+                && transfer.getAreaCode().matches("213")
+                && transfer.getTransferer().getCategory().equals("D")) {
+            businessRuleErrors += "D Category Transferer can only be transferred in transfer area 213. ; ";
         }
 
-        if (transferTypeCode.equals("710")
-                && !areaCode.matches("WG|WY|SE|CG")) {
+        if (transfer.getTransferTypeCode().equals("710")
+                && !transfer.getAreaCode().matches("574|213|363|510")) {
             businessRuleErrors += "This area is not an eligible area. ; ";
 
         }
 
-        if (!typeCode.equals("I")
+        if (!transfer.getTypeCode().equals("I")
                 && !isBlockSize(transfer)) {
-            businessRuleErrors += "Block size is too small for I type transfer. ; ";
+            businessRuleErrors += "Amount is too small for I type transfer. ; ";
         }
 
-        if (!typeCode.equals("I")
+        if (!transfer.getTypeCode().equals("I")
                 && isTotalOverCap(transfer)) {
-            businessRuleErrors += "This transfer puts the total over the percent allowed for this year. ; ";
+            businessRuleErrors += "This transfer is too large. ; ";
         }
 
         return businessRuleErrors;
     }
 
     public static boolean isBlockSize(WidgetTransfer transfer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return transfer.getAmount().compareTo(1000) < 0;
     }
 
     public static boolean isTotalOverCap(WidgetTransfer transfer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return transfer.getAmount().compareTo(1000000) > 0;
     }
 }

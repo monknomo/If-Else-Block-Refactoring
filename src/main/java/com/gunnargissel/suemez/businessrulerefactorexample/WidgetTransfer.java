@@ -16,6 +16,9 @@ public class WidgetTransfer {
     Customer transferee;
     WidgetAccount toAccount;
     Integer amount;
+    private String typeCode;
+    private String areaCode;
+    private String TypeCode;
 
     public Customer getTransferer() {
         return transferer;
@@ -60,19 +63,15 @@ public class WidgetTransfer {
     
     
     String getTransferTypeCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return typeCode;
     }
 
     String getAreaCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    Customer getTrasferer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return areaCode;
     }
 
     String getTypeCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return TypeCode;
     }
       
 }

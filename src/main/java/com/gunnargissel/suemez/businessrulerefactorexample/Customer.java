@@ -13,13 +13,16 @@ import java.util.Map;
  * @author monknomo
  */
 public class Customer {
-    Map<String,WidgetAccount> account = new HashMap<>();
+
+    Map<String, WidgetAccount> account = new HashMap<>();
+    String name;
+    private String category;
 
     String getCategory() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return category;
     }
 
     WidgetAccount getAccount(WidgetAccount fromAccount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return account.get(this);
     }
 }
