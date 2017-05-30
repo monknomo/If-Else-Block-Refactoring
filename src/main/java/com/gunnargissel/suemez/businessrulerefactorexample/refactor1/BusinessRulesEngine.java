@@ -16,12 +16,14 @@ public class BusinessRulesEngine {
     public static final String checkWidgetTransfer(WidgetTransfer transfer) {
         String businessRuleErrors = "";
         
+        Integer balance = transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance();
+        Integer transferAmount = transfer.getAmount();
         String transferTypeCode = transfer.getTransferTypeCode();
         String areaCode = transfer.getAreaCode();
         String category = transfer.getTransferer().getCategory();
         String typeCode = transfer.getTypeCode();
 
-        if (transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance().compareTo(transfer.getAmount()) > 0) {
+        if (balance.compareTo(transferAmount) > 0) {
             businessRuleErrors += "Insufficient balance to transfer ; ";
         }
 

@@ -14,6 +14,15 @@ import java.util.function.Predicate;
  */
 public class BusinessRulesEngine {
 
+    static Predicate<WidgetTransfer> suffientAmount = trans -> trans.getTransferer().getAccount(trans.getFromAccount()).getBalance().compareTo(trans.getAmount()) > 0;
+    static Predicate<String> isPartner = ttc -> ttc.equals("200");
+    static Predicate<String> isFriendsAndFamily = ttc -> ttc.equals("710");
+    static Predicate<String> isFriendAndFamilyDiscountLegal = ac -> ac.matches("574|213|363|510");
+    static Predicate<String> isPartneringArea = ac -> ac.matches("907|412|213");
+    static Predicate<String> isDirigibleArea = ac -> ac.matches("213");
+    static Predicate<String> isDirigibleCategory = cat -> cat.equals("D");
+    static Predicate<String> isInternal = tc -> tc.equals("I");
+
     public static final String checkWidgetTransfer(WidgetTransfer transfer) {
         String businessRuleErrors = "";
 
@@ -22,15 +31,7 @@ public class BusinessRulesEngine {
         String category = transfer.getTransferer().getCategory();
         String typeCode = transfer.getTypeCode();
 
-        Predicate<String> isPartner = ttc -> ttc.equals("200");
-        Predicate<String> isFriendsAndFamily = ttc -> ttc.equals("710");
-        Predicate<String> isFriendAndFamilyDiscountLegal = ac -> ac.matches("574|213|363|510");
-        Predicate<String> isPartneringArea = ac -> ac.matches("907|412|213");
-        Predicate<String> isDirigibleArea = ac -> ac.matches("213");
-        Predicate<String> isDirigibleCategory = cat -> cat.equals("D");
-        Predicate<String> isInternal = tc -> tc.equals("I");
-
-        if (transfer.getTransferer().getAccount(transfer.getFromAccount()).getBalance().compareTo(transfer.getAmount()) > 0) {
+        if (suffientAmount.test(transfer)) {
             businessRuleErrors += "Insufficient balance to transfer ; ";
         }
 
