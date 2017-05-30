@@ -14,14 +14,14 @@ import java.util.function.Predicate;
  */
 public class BusinessRulesEngine {
 
-    static Predicate<WidgetTransfer> suffientAmount = trans -> trans.getTransferer().getAccount(trans.getFromAccount()).getBalance().compareTo(trans.getAmount()) > 0;
-    static Predicate<String> isPartner = ttc -> ttc.equals("200");
-    static Predicate<String> isFriendsAndFamily = ttc -> ttc.equals("710");
-    static Predicate<String> isFriendAndFamilyDiscountLegal = ac -> ac.matches("574|213|363|510");
-    static Predicate<String> isPartneringArea = ac -> ac.matches("907|412|213");
-    static Predicate<String> isDirigibleArea = ac -> ac.matches("213");
-    static Predicate<String> isDirigibleCategory = cat -> cat.equals("D");
-    static Predicate<String> isInternal = tc -> tc.equals("I");
+    static final Predicate<WidgetTransfer> suffientAmount = trans -> trans.getTransferer().getAccount(trans.getFromAccount()).getBalance().compareTo(trans.getAmount()) > 0;
+    static final Predicate<String> isPartner = ttc -> ttc.equals("200");
+    static final Predicate<String> isFriendsAndFamily = ttc -> ttc.equals("710");
+    static final Predicate<String> isFriendAndFamilyDiscountLegal = ac -> ac.matches("574|213|363|510");
+    static final Predicate<String> isPartneringArea = ac -> ac.matches("907|412|213");
+    static final Predicate<String> isDirigibleArea = ac -> ac.matches("213");
+    static final Predicate<String> isDirigibleCategory = cat -> cat.equals("D");
+    static final Predicate<String> isInternal = tc -> tc.equals("I");
 
     public static final String checkWidgetTransfer(WidgetTransfer transfer) {
         String businessRuleErrors = "";

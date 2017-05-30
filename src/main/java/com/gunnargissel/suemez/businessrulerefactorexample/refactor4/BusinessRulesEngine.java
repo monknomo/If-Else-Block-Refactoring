@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gunnargissel.suemez.businessrulerefactorexample.refactor3;
+package com.gunnargissel.suemez.businessrulerefactorexample.refactor4;
 
+import com.gunnargissel.suemez.businessrulerefactorexample.refactor3.*;
 import com.gunnargissel.suemez.businessrulerefactorexample.*;
 import java.util.function.Predicate;
 
@@ -24,7 +25,13 @@ public class BusinessRulesEngine {
     static final Predicate<WidgetTransfer> isInternal = trans -> trans.getTypeCode().equals("I");
     static final Predicate<WidgetTransfer> isBlockSize = trans -> isBlockSize(trans);
     static final Predicate<WidgetTransfer> isTotalOverCap = trans -> isTotalOverCap(trans);
-
+    
+    static final Predicate<WidgetTransfer> parterTransferReqs = trans -> isPartner.and(isPartneringArea.negate()).test(trans);
+    static final Predicate<WidgetTransfer> dirigibleTransferReqs = trans -> isPartner.and(isDirigibleArea).and(isDirigibleCategory).test(trans);
+    static final Predicate<WidgetTransfer> friendsAndFamilyReqs = trans -> isFriendsAndFamily.and(isFriendAndFamilyDiscountLegal.negate()).test(trans);
+    static final Predicate<WidgetTransfer> internalBlockReqs = trans -> isInternal.negate().and(isBlockSize.negate()).test(trans);
+    static final Predicate<WidgetTransfer> internalTotalCapReqs = trans -> isInternal.negate().and(isTotalOverCap.negate()).test(trans);
+    
     public static final String checkWidgetTransfer(WidgetTransfer transfer) {
         String businessRuleErrors = "";
 
@@ -32,23 +39,23 @@ public class BusinessRulesEngine {
             businessRuleErrors += "Insufficient balance to transfer ; ";
         }
 
-        if (isPartner.and(isPartneringArea.negate()).test(transfer)) {
+        if (parterTransferReqs.test(transfer)) {
             businessRuleErrors += "This area is not a transfer eligible area. ; ";
         }
 
-        if (isPartner.and(isDirigibleArea).and(isDirigibleCategory).test(transfer)) {
+        if (dirigibleTransferReqs.test(transfer)) {
             businessRuleErrors += "D Category Transferer can only be transferred in transfer area 213. ; ";
         }
 
-        if (isFriendsAndFamily.and(isFriendAndFamilyDiscountLegal.negate()).test(transfer)) {
+        if (friendsAndFamilyReqs.test(transfer)) {
             businessRuleErrors += "This area is not an eligible area. ; ";
         }
 
-        if (isInternal.negate().and(isBlockSize.negate()).test(transfer)) {
+        if (internalBlockReqs.test(transfer)) {
             businessRuleErrors += "Amount is too small for I type transfer. ; ";
         }
 
-        if (isInternal.negate().and(isTotalOverCap.negate()).test(transfer)) {
+        if (internalTotalCapReqs.test(transfer)) {
             businessRuleErrors += "This transfer is too large. ; ";
         }
 
