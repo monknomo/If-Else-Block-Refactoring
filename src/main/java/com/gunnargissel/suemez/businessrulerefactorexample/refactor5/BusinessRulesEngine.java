@@ -5,8 +5,6 @@
  */
 package com.gunnargissel.suemez.businessrulerefactorexample.refactor5;
 
-import com.gunnargissel.suemez.businessrulerefactorexample.refactor4.*;
-import com.gunnargissel.suemez.businessrulerefactorexample.refactor3.*;
 import com.gunnargissel.suemez.businessrulerefactorexample.*;
 import java.util.function.Predicate;
 
