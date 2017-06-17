@@ -6,7 +6,7 @@
 package com.gunnargissel.suemez.businessrulerefactorexample;
 
 /**
- *
+ * This is a Customer's account with their Widget Balance
  * @author monknomo
  */
 public class WidgetAccount {

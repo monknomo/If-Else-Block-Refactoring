@@ -6,7 +6,7 @@
 package com.gunnargissel.suemez.businessrulerefactorexample;
 
 /**
- *
+ * The represents a transfer of widgets between Customer WidgetAccounts
  * @author monknomo
  */
 public class WidgetTransfer {

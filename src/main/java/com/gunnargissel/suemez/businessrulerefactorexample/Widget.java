@@ -6,7 +6,7 @@
 package com.gunnargissel.suemez.businessrulerefactorexample;
 
 /**
- *
+ * This represents a Widget
  * @author monknomo
  */
 public class Widget {

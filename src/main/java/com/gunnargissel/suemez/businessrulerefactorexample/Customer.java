@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * This is a Customer, with all their WidgetAccounts, a name and a category
  * @author monknomo
  */
 public class Customer {

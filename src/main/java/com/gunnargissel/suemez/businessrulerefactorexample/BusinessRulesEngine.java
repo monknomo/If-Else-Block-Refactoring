@@ -6,7 +6,7 @@
 package com.gunnargissel.suemez.businessrulerefactorexample;
 
 /**
- *
+ * This is the original business rule method.  It analyzes a WidgetTransfer object for rule violation, and returns any errors that may be present
  * @author monknomo
  */
 public class BusinessRulesEngine {
