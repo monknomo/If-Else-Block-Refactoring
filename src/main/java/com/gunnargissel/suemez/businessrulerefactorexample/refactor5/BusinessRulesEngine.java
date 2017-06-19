@@ -39,7 +39,7 @@ public class BusinessRulesEngine {
         widgetTransferValidator.addRule(friendsAndFamilyReqs, "This area is not an eligible area.");
         widgetTransferValidator.addRule(internalBlockReqs, "Amount is too small for I type transfer.");
         widgetTransferValidator.addRule(internalTotalCapReqs, "This transfer is too large.");
-        return widgetTransferValidator.validate(transfer);
+        return widgetTransferValidator.validate(transfer); 
     }
 
     public static boolean isBlockSize(WidgetTransfer transfer) {

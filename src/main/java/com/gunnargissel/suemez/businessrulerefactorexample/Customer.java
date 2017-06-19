@@ -14,9 +14,9 @@ import java.util.Map;
  */
 public class Customer {
 
-    Map<String, WidgetAccount> account = new HashMap<>();
-    String name;
-    private String category;
+    private final Map<String, WidgetAccount> accounts = new HashMap<>();
+    private final String name;
+    private final String category;
 
     public Customer(String name, String category) {
         this.name = name;
@@ -26,8 +26,12 @@ public class Customer {
     public String getCategory() {
         return category;
     }
+    
+    public void addAccount(String accountName, WidgetAccount account){
+        accounts.put(accountName, account);
+    }
 
-    public WidgetAccount getAccount(WidgetAccount fromAccount) {
-        return account.get(this);
+    public WidgetAccount getAccount(String fromAccount) {
+        return accounts.get(fromAccount);
     }
 }

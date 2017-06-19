@@ -12,14 +12,14 @@ package com.gunnargissel.suemez.businessrulerefactorexample;
 public class WidgetTransfer {
 
     Customer transferer;
-    WidgetAccount fromAccount;
+    String fromAccount;
     Customer transferee;
-    WidgetAccount toAccount;
+    String toAccount;
     Integer amount;
     private String typeCode;
     private String areaCode;
 
-    public WidgetTransfer(Customer transferer, WidgetAccount fromAccount, Customer transferee, WidgetAccount toAccount, Integer amount, String typeCode, String areaCode) {
+    public WidgetTransfer(Customer transferer, String fromAccount, Customer transferee, String toAccount, Integer amount, String typeCode, String areaCode) {
         this.transferer = transferer;
         this.fromAccount = fromAccount;
         this.transferee = transferee;
@@ -37,11 +37,11 @@ public class WidgetTransfer {
         this.transferer = transferer;
     }
 
-    public WidgetAccount getFromAccount() {
+    public String getFromAccount() {
         return fromAccount;
     }
 
-    public void setFromAccount(WidgetAccount fromAccount) {
+    public void setFromAccount(String fromAccount) {
         this.fromAccount = fromAccount;
     }
 
@@ -53,11 +53,11 @@ public class WidgetTransfer {
         this.transferee = transferee;
     }
 
-    public WidgetAccount getToAccount() {
+    public String getToAccount() {
         return toAccount;
     }
 
-    public void setToAccount(WidgetAccount toAccount) {
+    public void setToAccount(String toAccount) {
         this.toAccount = toAccount;
     }
 
