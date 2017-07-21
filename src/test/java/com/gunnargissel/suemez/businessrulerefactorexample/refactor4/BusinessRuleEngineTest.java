@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gunnargissel.suemez.businessrulerefactorexample;
+package com.gunnargissel.suemez.businessrulerefactorexample.refactor4;
 
+import com.gunnargissel.suemez.businessrulerefactorexample.Customer;
+import com.gunnargissel.suemez.businessrulerefactorexample.WidgetAccount;
+import com.gunnargissel.suemez.businessrulerefactorexample.WidgetTransfer;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 

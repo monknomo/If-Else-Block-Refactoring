@@ -33,12 +33,12 @@ public class BusinessRulesEngine {
     
     public static final Result<WidgetTransfer> checkWidgetTransfer(WidgetTransfer transfer) {
         Validator<WidgetTransfer> widgetTransferValidator = new Validator();
-        widgetTransferValidator.addRule(suffientAmount, "Insufficient balance to transfer.");
-        widgetTransferValidator.addRule(parterTransferReqs, "This area is not a transfer eligible area.");
-        widgetTransferValidator.addRule(dirigibleTransferReqs, "D Category Transferer can only be transferred in transfer area 213.");
-        widgetTransferValidator.addRule(friendsAndFamilyReqs, "This area is not an eligible area.");
-        widgetTransferValidator.addRule(internalBlockReqs, "Amount is too small for I type transfer.");
-        widgetTransferValidator.addRule(internalTotalCapReqs, "This transfer is too large.");
+        widgetTransferValidator.addRule(suffientAmount, "Insufficient balance to transfer ; ");
+        widgetTransferValidator.addRule(parterTransferReqs, "This area is not a transfer eligible area ; ");
+        widgetTransferValidator.addRule(dirigibleTransferReqs, "D Category Transferer can only be transferred in transfer area 213 ; ");
+        widgetTransferValidator.addRule(friendsAndFamilyReqs, "This area is not an eligible area ; ");
+        widgetTransferValidator.addRule(internalBlockReqs, "Amount is too small for I type transfer ; ");
+        widgetTransferValidator.addRule(internalTotalCapReqs, "This transfer is too large ; ");
         return widgetTransferValidator.validate(transfer); 
     }
 

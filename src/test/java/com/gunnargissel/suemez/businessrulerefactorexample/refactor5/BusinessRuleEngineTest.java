@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gunnargissel.suemez.businessrulerefactorexample;
+package com.gunnargissel.suemez.businessrulerefactorexample.refactor5;
 
-import static junit.framework.Assert.assertEquals;
+import com.gunnargissel.suemez.businessrulerefactorexample.Customer;
+import com.gunnargissel.suemez.businessrulerefactorexample.WidgetAccount;
+import com.gunnargissel.suemez.businessrulerefactorexample.WidgetTransfer;
+import static junit.framework.Assert.*;
 import org.junit.Test;
 
 /**
@@ -27,8 +30,8 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 999, "200", "213");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+       assertFalse( result.hasErrors());
     }
     
     @Test
@@ -44,8 +47,9 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 1001, "200", "213");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("Insufficient balance to transfer ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("Insufficient balance to transfer ; ", result.getErrors());
     }
     
     @Test
@@ -61,8 +65,9 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 500, "200", "999");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("This area is not a transfer eligible area. ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("This area is not a transfer eligible area. ; ", result.getErrors());
     }
     
         @Test
@@ -78,8 +83,9 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 500, "200", "907");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("D Category Transferer can only be transferred in transfer area 213. ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("D Category Transferer can only be transferred in transfer area 213. ; ", result.getErrors());
     }
     
             @Test
@@ -95,8 +101,9 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 500, "710", "907");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("This area is not a transfer eligible area. ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("This area is not a transfer eligible area. ; ", result.getErrors());
     }
     
                 @Test
@@ -112,8 +119,9 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 500, "I", "907");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("Amount is too small for I type transfer. ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("Amount is too small for I type transfer. ; ", result.getErrors());
     }
     
                     @Test
@@ -129,8 +137,9 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 1000001, "I", "907");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("This transfer is too large. ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("This transfer is too large. ; ", result.getErrors());
     }
     
                         @Test
@@ -146,7 +155,8 @@ public class BusinessRuleEngineTest {
         transferer.addAccount(toAccountNum, fromAccount);
         
         WidgetTransfer xfer = new WidgetTransfer(transferer, fromAccountNum, transferee, toAccountNum, 1000001, "I", "907");
-        String error = BusinessRulesEngine.checkWidgetTransfer(xfer);
-        assertEquals("Insufficient balance to transfer ; This transfer is too large. ; ", error);
+        Result<WidgetTransfer> result = BusinessRulesEngine.checkWidgetTransfer(xfer);
+        assertTrue(result.hasErrors());
+        assertEquals("Insufficient balance to transfer ; This transfer is too large. ; ", result.getErrors());
     }
 }

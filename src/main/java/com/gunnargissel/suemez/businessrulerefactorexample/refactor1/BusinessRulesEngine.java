@@ -23,7 +23,7 @@ public class BusinessRulesEngine {
         String category = transfer.getTransferer().getCategory();
         String typeCode = transfer.getTypeCode();
 
-        if (balance.compareTo(transferAmount) > 0) {
+        if (balance.compareTo(transferAmount) < 0) {
             businessRuleErrors += "Insufficient balance to transfer ; ";
         }
 
@@ -35,23 +35,23 @@ public class BusinessRulesEngine {
         }
 
         if (transferTypeCode.equals("200")
-                && areaCode.matches("213")
+                && !areaCode.matches("213")
                 && category.equals("D")) {
             businessRuleErrors += "D Category Transferer can only be transferred in transfer area 213. ; ";
         }
 
         if (transferTypeCode.equals("710")
                 && !areaCode.matches("574|213|363|510")) {
-            businessRuleErrors += "This area is not an eligible area. ; ";
+            businessRuleErrors += "This area is not a transfer eligible area. ; ";
 
         }
 
-        if (!typeCode.equals("I")
-                && !isBlockSize(transfer)) {
+        if (typeCode.equals("I")
+                && isBlockSize(transfer)) {
             businessRuleErrors += "Amount is too small for I type transfer. ; ";
         }
 
-        if (!typeCode.equals("I")
+        if (typeCode.equals("I")
                 && isTotalOverCap(transfer)) {
             businessRuleErrors += "This transfer is too large. ; ";
         }

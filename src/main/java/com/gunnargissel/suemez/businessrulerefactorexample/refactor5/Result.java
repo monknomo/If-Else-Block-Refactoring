@@ -14,10 +14,22 @@ public class Result<T> {
     T result;
 
     Result(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.errors = message;
     }
     
     Result(T message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.result = message;
+    }
+    
+    public boolean hasErrors(){
+        return null!=errors || errors.length()>0;
+    }
+    
+    public T getResult(){
+        return result;
+    }
+    
+    public String getErrors(){
+        return errors;
     }
 }
