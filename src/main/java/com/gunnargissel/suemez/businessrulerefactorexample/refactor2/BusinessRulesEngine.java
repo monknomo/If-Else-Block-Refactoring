@@ -19,7 +19,7 @@ public class BusinessRulesEngine {
     static final Predicate<String> isFriendsAndFamily = ttc -> ttc.equals("710");
     static final Predicate<String> isFriendAndFamilyDiscountLegal = ac -> ac.matches("574|213|363|510");
     static final Predicate<String> isPartneringArea = ac -> ac.matches("907|412|213");
-    static final Predicate<String> dirigiblesForbiddenArea = ac -> ac.matches("213");
+    static final Predicate<String> isDirigiblesForbiddenArea = ac -> ac.matches("213");
     static final Predicate<String> isDirigibleCategory = cat -> cat.equals("D");
     static final Predicate<String> isInternal = tc -> tc.equals("I");
 
@@ -41,7 +41,7 @@ public class BusinessRulesEngine {
         }
 
         if (isPartner.test(transferTypeCode)
-                && dirigiblesForbiddenArea.negate().test(areaCode)
+                && isDirigiblesForbiddenArea.negate().test(areaCode)
                 && isDirigibleCategory.test(category)) {
             businessRuleErrors += "D Category Transferer can only be transferred in transfer area 213. ; ";
         }
