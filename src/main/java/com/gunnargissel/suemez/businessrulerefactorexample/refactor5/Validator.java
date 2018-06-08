@@ -27,6 +27,7 @@ public class Validator<T> {
         String errors = rules.keySet().stream()
                 .filter(rule -> rule.test(obj))
                 .map(rule -> rules.get(rule))
+                .sorted()
                 .collect(Collectors.joining());
         if(Objects.isNull(errors) || errors.isEmpty()){
             return new Result<>(obj);
