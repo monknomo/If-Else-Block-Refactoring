@@ -14,7 +14,7 @@ import java.util.function.Predicate;
  */
 public class BusinessRulesEngine {
 
-    static final Predicate<WidgetTransfer> suffientAmount = trans -> trans.getTransferer().getAccount(trans.getFromAccount()).getBalance().compareTo(trans.getAmount()) > 0;
+    static final Predicate<WidgetTransfer> suffientAmount = trans -> trans.getTransferer().getAccount(trans.getFromAccount()).getBalance().compareTo(trans.getAmount()) < 0;
     static final Predicate<WidgetTransfer> isPartner = trans -> trans.getTransferTypeCode().equals("200");
     static final Predicate<WidgetTransfer> isFriendsAndFamily = trans -> trans.getTransferTypeCode().equals("710");
     static final Predicate<WidgetTransfer> isFriendAndFamilyDiscountLegal = trans -> trans.getAreaCode().matches("574|213|363|510");
@@ -26,19 +26,19 @@ public class BusinessRulesEngine {
     static final Predicate<WidgetTransfer> isTotalOverCap = trans -> isTotalOverCap(trans);
     
     static final Predicate<WidgetTransfer> parterTransferReqs = trans -> isPartner.and(isPartneringArea.negate()).test(trans);
-    static final Predicate<WidgetTransfer> dirigibleTransferReqs = trans -> isPartner.and(isDirigibleArea).and(isDirigibleCategory).test(trans);
+    static final Predicate<WidgetTransfer> dirigibleTransferReqs = trans -> isPartner.and(isDirigibleArea.negate()).and(isDirigibleCategory).test(trans);
     static final Predicate<WidgetTransfer> friendsAndFamilyReqs = trans -> isFriendsAndFamily.and(isFriendAndFamilyDiscountLegal.negate()).test(trans);
-    static final Predicate<WidgetTransfer> internalBlockReqs = trans -> isInternal.negate().and(isBlockSize.negate()).test(trans);
-    static final Predicate<WidgetTransfer> internalTotalCapReqs = trans -> isInternal.negate().and(isTotalOverCap.negate()).test(trans);
+    static final Predicate<WidgetTransfer> internalBlockReqs = trans -> isInternal.and(isBlockSize).test(trans);
+    static final Predicate<WidgetTransfer> internalTotalCapReqs = trans -> isInternal.and(isTotalOverCap).test(trans);
     
     public static final Result<WidgetTransfer> checkWidgetTransfer(WidgetTransfer transfer) {
         Validator<WidgetTransfer> widgetTransferValidator = new Validator();
         widgetTransferValidator.addRule(suffientAmount, "Insufficient balance to transfer ; ");
-        widgetTransferValidator.addRule(parterTransferReqs, "This area is not a transfer eligible area ; ");
-        widgetTransferValidator.addRule(dirigibleTransferReqs, "D Category Transferer can only be transferred in transfer area 213 ; ");
-        widgetTransferValidator.addRule(friendsAndFamilyReqs, "This area is not an eligible area ; ");
-        widgetTransferValidator.addRule(internalBlockReqs, "Amount is too small for I type transfer ; ");
-        widgetTransferValidator.addRule(internalTotalCapReqs, "This transfer is too large ; ");
+        widgetTransferValidator.addRule(parterTransferReqs, "This area is not a transfer eligible area. ; ");
+        widgetTransferValidator.addRule(dirigibleTransferReqs, "D Category Transferer can only be transferred in transfer area 213. ; ");
+        widgetTransferValidator.addRule(friendsAndFamilyReqs, "This area is not a transfer eligible area. ; ");
+        widgetTransferValidator.addRule(internalBlockReqs, "Amount is too small for I type transfer. ; ");
+        widgetTransferValidator.addRule(internalTotalCapReqs, "This transfer is too large. ; ");
         return widgetTransferValidator.validate(transfer); 
     }
 

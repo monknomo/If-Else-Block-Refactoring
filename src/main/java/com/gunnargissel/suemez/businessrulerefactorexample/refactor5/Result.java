@@ -22,7 +22,7 @@ public class Result<T> {
     }
     
     public boolean hasErrors(){
-        return null!=errors || errors.length()>0;
+        return null!=errors && errors.length()>0;
     }
     
     public T getResult(){

@@ -70,7 +70,7 @@ public class BusinessRuleEngineTest {
         assertEquals("This area is not a transfer eligible area. ; ", result.getErrors());
     }
     
-        @Test
+    @Test
     public void dirigibleTransferRule(){
         Customer transferer = new Customer("Alice", "D");
         WidgetAccount fromAccount = new WidgetAccount(1000);
@@ -88,7 +88,7 @@ public class BusinessRuleEngineTest {
         assertEquals("D Category Transferer can only be transferred in transfer area 213. ; ", result.getErrors());
     }
     
-            @Test
+    @Test
     public void type710TransferRule(){
         Customer transferer = new Customer("Alice", "D");
         WidgetAccount fromAccount = new WidgetAccount(1000);
@@ -106,7 +106,7 @@ public class BusinessRuleEngineTest {
         assertEquals("This area is not a transfer eligible area. ; ", result.getErrors());
     }
     
-                @Test
+    @Test
     public void typeITransferRule(){
         Customer transferer = new Customer("Alice", "D");
         WidgetAccount fromAccount = new WidgetAccount(1000);
@@ -123,8 +123,8 @@ public class BusinessRuleEngineTest {
         assertTrue(result.hasErrors());
         assertEquals("Amount is too small for I type transfer. ; ", result.getErrors());
     }
-    
-                    @Test
+
+    @Test
     public void typeITransferTooBigRule(){
         Customer transferer = new Customer("Alice", "D");
         WidgetAccount fromAccount = new WidgetAccount(1000002);
@@ -142,7 +142,7 @@ public class BusinessRuleEngineTest {
         assertEquals("This transfer is too large. ; ", result.getErrors());
     }
     
-                        @Test
+    @Test
     public void multiError(){
         Customer transferer = new Customer("Alice", "D");
         WidgetAccount fromAccount = new WidgetAccount(0);
